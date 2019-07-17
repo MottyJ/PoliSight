@@ -264,3 +264,66 @@ textarea {
     page-break-after: avoid;
   }
 }
+
+/* ////////////////////////////////////////////////////////  */
+.wrapper {
+  align-item: center;
+  display: flex;
+  
+  .filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+  }
+ 
+}
+
+h3 small {
+  display: block;
+  font-size: 12px;
+}
+
+button {
+  margin-top: 40px;
+}
+
+#map {
+  height: 100vh;
+  width: 700px;
+}
+
+.alert {
+  color: red;
+  display: none;
+  font-size: 16px;
+  font-weight: bold;
+  &.is-visible {
+    display: block;
+  }
+}
+
+.tt-menu {
+  border: 1px solid transparent;
+  border-color: transparent lightgrey lightgrey lightgrey;
+  background: white;
+  width: 100%;
+
+
+  .tt-dataset {
+    .tt-suggestion {
+      color: darkgrey;
+      cursor: pointer;
+      padding: 1rem;
+      user-select: none;
+
+      &.tt-cursor, &:hover {
+        background: lightgrey;
+        color: white;
+      }
+  
+        & + .tt-suggestion {
+          border-top: 1px solid lightgrey;
+        }
+    }
+  }
+}

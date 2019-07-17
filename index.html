@@ -15,11 +15,8 @@
   <link rel="stylesheet" href="css/main.css">
 
   <meta name="theme-color" content="#fafafa">
-  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.4/mapbox-gl-draw.js"></script>
-  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js"></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
-</head>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+ </head>
 
 <body>
   <!--[if IE]>
@@ -28,9 +25,55 @@
 
   <!-- Add your site or application content here -->
 
-  <div id='map'></div>
+  
+
+  
+  <div class="wrapper">
+    <div class="filter-wrapper">
+      <h3>Filter those markers: </h3>
+      <div class="filter-select">
+        <select class="filter filter-animal">
+          <option value="all">All</option>
+          <option value="fish">fish</option>
+          <option value="dog">dog</option>
+          <option value="cat">cat</option>
+        </select>
+
+        <select class="filter filter-drink">
+          <option value="all">All</option>
+          <option value="coca">coca</option>
+          <option value="fanta">fanta</option>
+        </select>
+
+        <select class="filter filter-name">
+          <option value="all">All</option>
+          <option value="sandrine">sandrine</option>
+          <option value="lea">lea</option>
+          <option value="paul">paul</option>
+        </select>
+      </div>
+
+      <div id="searchMap">
+        <h3>Search for a place
+          <small>(Existing value are: cat, fish, dog, sandrine, lea, paul, fanta, coca.)</small>
+        </h3>
+        <input class="typeahead" type="text" placeholder="Search for...">
+      </div>
+
+      <div class="alert">There is no result for your current search</div>
+
+      <button id="resetFilter"> Reset</button>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+
+
+
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
@@ -39,7 +82,7 @@
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
