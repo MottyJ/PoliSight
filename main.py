@@ -12,32 +12,30 @@ connection = connect(host='localhost',
                      cursorclass=cursors.DictCursor)
 print(connection)
 
-def connect():
+def connect(sql):
     try:
         with connection.cursor() as cursor:
-            sql ="select full_name from actors"
             cursor.execute(sql)
             result = cursor.fetchall()
-            for i in result:
-                print(i)
-
+            return result
     except:
         connection.close()
 
+my_query = connect("select full_name,id from actors")
+print(my_query)
 
 @bottle.route('/')
 def index():
-    path = os.path.abspath(__file__)
-    print("fasdafs")
+
     return bottle.template("index.html")
 
 
-@bottle.route('/static/css/<filename:re:.*\.css>')
+@bottle.route('/css/<filename:re:.*\.css>')
 def d(filename):
     return bottle.static_file(filename,  root='static/css')
 
 
-@bottle.route('/static/js/<filename:re:.*\.js>')
+@bottle.route('./static/js/<filename:re:.*\.js>')
 def a(filename):
     return bottle.static_file(filename,  root='static/js')
 
@@ -45,8 +43,9 @@ def a(filename):
 
 
 def main():
-    connect()
+
     bottle.run(host='localhost', port=7000)
 
 if __name__ == '__main__':
     main()
+    connect()
