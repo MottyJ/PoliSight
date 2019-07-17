@@ -97,8 +97,8 @@ var filterParse = JSON.parse(filterStringify);
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 6,
-    center: new google.maps.LatLng(45.882360730184025, 2.57080078125)
+    zoom: 12,
+    center: new google.maps.LatLng(41.3947688, 2.0787279)
   });
 
   for (var i = 0; i < json.length; i++) {
@@ -140,8 +140,8 @@ function setMarkers(marker, map) {
   google.maps.event.addListener(
     markerMap,
     "click",
-    (function(marker1, content) {
-      return function() {
+    (function (marker1, content) {
+      return function () {
         infowindow.setContent(content);
         infowindow.open(map, markerMap);
         map.panTo(this.getPosition());
@@ -180,7 +180,7 @@ function newFilter(
   clusterManager(filtered);
 }
 
-Array.prototype.flexFilter = function(info) {
+Array.prototype.flexFilter = function (info) {
   // Set our variables
   var matchesFilter,
     matches = [],
@@ -189,7 +189,7 @@ Array.prototype.flexFilter = function(info) {
   // Helper function to loop through the filter criteria to find matching values
   // Each filter criteria is treated as "AND". So each item must match all the filter criteria to be considered a match.
   // Multiple filter values in a filter field are treated as "OR" i.e. ["Blue", "Green"] will yield items matching a value of Blue OR Green.
-  matchesFilter = function(item) {
+  matchesFilter = function (item) {
     count = 0;
     for (var n = 0; n < info.length; n++) {
       if (info[n]["Values"].indexOf(item[info[n]["Field"]]) > -1) {
@@ -216,30 +216,30 @@ Array.prototype.flexFilter = function(info) {
   return matches;
 };
 
-jQuery(document).ready(function() {
-  jQuery(".filter-animal").on("change", function() {
+jQuery(document).ready(function () {
+  jQuery(".filter-animal").on("change", function () {
     var filter2 = jQuery(".filter-drink").val();
     var filter3 = jQuery(".filter-name").val();
     newFilter(jQuery(this).val(), filter2, filter3);
   });
 
-  jQuery(".filter-drink").on("change", function() {
+  jQuery(".filter-drink").on("change", function () {
     var filter1 = jQuery(".filter-animal").val();
     var filter3 = jQuery(".filter-name").val();
     newFilter(filter1, jQuery(this).val(), filter3);
   });
 
-  jQuery(".filter-name").on("change", function() {
+  jQuery(".filter-name").on("change", function () {
     var filter1 = jQuery(".filter-animal").val();
     var filter2 = jQuery(".filter-drink").val();
     newFilter(filter1, filter2, jQuery(this).val());
   });
 
-  searchInput.on("keyup", function() {
+  searchInput.on("keyup", function () {
     var searchTyped = $(this).val();
     var arr = [];
     if (searchTyped.length > 0) {
-      jsonParse.filter(function() {
+      jsonParse.filter(function () {
         for (i = 0; i < json.length; i++) {
           marker = markers[i];
           var markerFilter = [];
@@ -262,7 +262,7 @@ jQuery(document).ready(function() {
     }
   });
 
-  resetButton.on("click", function() {
+  resetButton.on("click", function () {
     searchInput.val("");
     filterSelect.val("all");
     newFilter();
@@ -270,20 +270,20 @@ jQuery(document).ready(function() {
 
   //delete all duplicated value from the previous array
   var uniqueValue = [];
-  jQuery.each(filterResults, function(i, el) {
+  jQuery.each(filterResults, function (i, el) {
     if (jQuery.inArray(el, uniqueValue) === -1) {
       uniqueValue.push(el);
     }
   });
 
-  var substringMatcher = function(strs) {
+  var substringMatcher = function (strs) {
     return function findMatches(q, cb) {
       var matches, substringRegex;
       matches = [];
 
       substrRegex = new RegExp(q, "i");
 
-      jQuery.each(strs, function(i, str) {
+      jQuery.each(strs, function (i, str) {
         if (substrRegex.test(str)) {
           matches.push(str);
         }
@@ -304,6 +304,6 @@ jQuery(document).ready(function() {
   );
 });
 
-jQuery(window).on("load", function() {
+jQuery(window).on("load", function () {
   initMap();
 });

@@ -10,8 +10,13 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
-   body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
 html {
   color: #222;
   font-size: 1em;
@@ -193,9 +198,9 @@ textarea {
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 
@@ -206,6 +211,7 @@ textarea {
    ========================================================================== */
 
 @media print {
+
   *,
   *:before,
   *:after {
@@ -216,16 +222,20 @@ textarea {
     box-shadow: none !important;
     text-shadow: none !important;
   }
+
   a,
   a:visited {
     text-decoration: underline;
   }
+
   a[href]:after {
-    content: " (" attr(href) ")";
+    content: " ("attr(href) ")";
   }
+
   abbr[title]:after {
-    content: " (" attr(title) ")";
+    content: " ("attr(title) ")";
   }
+
   /*
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
@@ -234,14 +244,17 @@ textarea {
   a[href^="javascript:"]:after {
     content: "";
   }
+
   pre {
     white-space: pre-wrap !important;
   }
+
   pre,
   blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
+
   /*
      * Printing Tables:
      * https://web.archive.org/web/20180815150934/http://css-discuss.incutio.com/wiki/Printing_Tables
@@ -249,81 +262,59 @@ textarea {
   thead {
     display: table-header-group;
   }
+
   tr,
   img {
     page-break-inside: avoid;
   }
+
   p,
   h2,
   h3 {
     orphans: 3;
     widows: 3;
   }
+
   h2,
   h3 {
     page-break-after: avoid;
   }
 }
 
-/* ////////////////////////////////////////////////////////  */
-.wrapper {
-  align-item: center;
+.filter-wrapper {
   display: flex;
-  
-  .filter-wrapper {
-    display: flex;
-    flex-direction: column;
-    margin-right: 50px;
-  }
- 
+  width: 100vw;
+  height: 20vh;
 }
-
-h3 small {
-  display: block;
-  font-size: 12px;
-}
-
-button {
-  margin-top: 40px;
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 #map {
-  height: 100vh;
-  width: 700px;
+  height: 80vh;
 }
 
-.alert {
-  color: red;
-  display: none;
-  font-size: 16px;
-  font-weight: bold;
-  &.is-visible {
-    display: block;
-  }
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
 
-.tt-menu {
-  border: 1px solid transparent;
-  border-color: transparent lightgrey lightgrey lightgrey;
-  background: white;
-  width: 100%;
+.btn:hover {
+  background-color: #ddd;
+}
 
+.btn.active {
+  background-color: #666;
+  color: white;
+}
 
-  .tt-dataset {
-    .tt-suggestion {
-      color: darkgrey;
-      cursor: pointer;
-      padding: 1rem;
-      user-select: none;
-
-      &.tt-cursor, &:hover {
-        background: lightgrey;
-        color: white;
-      }
-  
-        & + .tt-suggestion {
-          border-top: 1px solid lightgrey;
-        }
-    }
-  }
+#myBtnContainer {
+  display: flex;
 }
