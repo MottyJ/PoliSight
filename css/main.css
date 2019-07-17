@@ -10,7 +10,8 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
-
+   body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
 html {
   color: #222;
   font-size: 1em;
@@ -262,22 +263,4 @@ textarea {
   h3 {
     page-break-after: avoid;
   }
-}
-
-.btn {
-  border: none;
-  outline: none;
-  padding: 12px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #ddd;
-}
-
-/* Add a dark background to the active button */
-.btn.active {
-  background-color: #666;
-  color: white;
 }
