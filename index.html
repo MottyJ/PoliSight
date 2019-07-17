@@ -33,9 +33,9 @@
     <tr>
       <td colspan="2">
         Source:
-        <input type="text" id="txtSource" value="Bandra, Mumbai, India" style="width: 200px" />
+        <input type="text" id="txtSource" value="vila de gracia" style="width: 200px" />
         &nbsp; Destination:
-        <input type="text" id="txtDestination" value="Andheri, Mumbai, India" style="width: 200px" />
+        <input type="text" id="txtDestination" value="les tres torres" style="width: 200px" />
         <br />
         <input type="button" value="Get Route" onclick="GetRoute()" />
         <hr />
@@ -52,10 +52,10 @@
         <div id="dvMap" style="width: 500px; height: 500px">
         </div>
       </td>
-      <td>
+      <!-- <td>
         <div id="dvPanel" style="width: 500px; height: 500px">
         </div>
-      </td>
+      </td> -->
     </tr>
   </table>
 
@@ -71,14 +71,14 @@
   });
    
   function GetRoute() {
-      var mumbai = new google.maps.LatLng(18.9750, 72.8258);
+      var barcelona = new google.maps.LatLng(41.3947688, 2.0787279);
       var mapOptions = {
           zoom: 7,
-          center: mumbai
+          center: barcelona
       };
       map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
       directionsDisplay.setMap(map);
-      directionsDisplay.setPanel(document.getElementById('dvPanel'));
+      // directionsDisplay.setPanel(document.getElementById('dvPanel'));
    
       //*********DIRECTIONS AND ROUTE**********************//
       source = document.getElementById("txtSource").value;
@@ -87,36 +87,38 @@
       var request = {
           origin: source,
           destination: destination,
-          travelMode: google.maps.TravelMode.DRIVING
+          travelMode: google.maps.TravelMode.DRIVING,
+          provideRouteAlternatives: true
       };
       directionsService.route(request, function (response, status) {
+          delete(response.routes[2])
           if (status == google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(response);
           }
       });
    
-      //*********DISTANCE AND DURATION**********************//
-      var service = new google.maps.DistanceMatrixService();
-      service.getDistanceMatrix({
-          origins: [source],
-          destinations: [destination],
-          travelMode: google.maps.TravelMode.DRIVING,
-          unitSystem: google.maps.UnitSystem.METRIC,
-          avoidHighways: false,
-          avoidTolls: false
-      }, function (response, status) {
-          if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
-              var distance = response.rows[0].elements[0].distance.text;
-              var duration = response.rows[0].elements[0].duration.text;
-              var dvDistance = document.getElementById("dvDistance");
-             dvDistance.innerHTML = "";
-              dvDistance.innerHTML += "Distance: " + distance + "<br />";
-              dvDistance.innerHTML += "Duration:" + duration;
+      // //*********DISTANCE AND DURATION**********************//
+      // var service = new google.maps.DistanceMatrixService();
+      // service.getDistanceMatrix({
+      //     origins: [source],
+      //     destinations: [destination],
+      //     travelMode: google.maps.TravelMode.DRIVING,
+      //     unitSystem: google.maps.UnitSystem.METRIC,
+      //     avoidHighways: false,
+      //     avoidTolls: false
+      // }, function (response, status) {
+      //     if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+      //         var distance = response.rows[0].elements[0].distance.text;
+      //         var duration = response.rows[0].elements[0].duration.text;
+      //         var dvDistance = document.getElementById("dvDistance");
+      //        dvDistance.innerHTML = "";
+      //         dvDistance.innerHTML += "Distance: " + distance + "<br />";
+      //         dvDistance.innerHTML += "Duration:" + duration;
    
-          } else {
-              alert("Unable to find the distance via road.");
-          }
-      });
+      //     } else {
+      //         alert("Unable to find the distance via road.");
+      //     }
+      // });
   }
   </script>
 
