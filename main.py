@@ -21,7 +21,7 @@ def connect(sql):
             return json.dumps(result)
 
 #
-my_query = "select longitude,LATITUDE,field_1 from db_head limit 3 "
+my_query = "select field_1 from db_head limit 3 "
 # print(my_query)
 
 @bottle.route('/')

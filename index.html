@@ -60,33 +60,40 @@
   </table>
   <div id="underDiv"></div>
 
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFlO6wbOOH-2IeCikhNfCoH_Z0PMrj628&libraries=places"></script>
+  <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFlO6wbOOH-2IeCikhNfCoH_Z0PMrj628&libraries=places"></script>
   <script type="text/javascript">
-  var source, destination;
-  var directionsDisplay;
-  var directionsDisplay2;
-  var directionsDisplay3;
-  var directionsService = new google.maps.DirectionsService();
-  google.maps.event.addDomListener(window, 'load', function () {
+    var source, destination;
+    var directionsDisplay;
+    var directionsDisplay2;
+    var directionsDisplay3;
+    var directionsService = new google.maps.DirectionsService();
+    google.maps.event.addDomListener(window, 'load', function () {
       new google.maps.places.SearchBox(document.getElementById('txtSource'));
       new google.maps.places.SearchBox(document.getElementById('txtDestination'));
       directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
-      directionsDisplay2 = new google.maps.DirectionsRenderer({ 'draggable': true});
-      directionsDisplay3 = new google.maps.DirectionsRenderer({ 'draggable': true});
-  });
+      directionsDisplay2 = new google.maps.DirectionsRenderer({ 'draggable': true });
+      directionsDisplay3 = new google.maps.DirectionsRenderer({ 'draggable': true });
+    });
 
-  function GetRoute() {
-    $.ajax( "/getall" )
-      .success(function(res) {
-        console.log('res')
-        $("#underDiv").text(res[0])
-      })
+    function GetRoute() {
+      $.ajax("/getall")
+        .done(function (res) {
+          var array1 = res.split("[|{|}|,|]");
+
+          console.log(array1[0]);
+          console.log(array1[1]);
+          console.log(array1[2]);
+          
+
+          $("#underDiv").text(array1[3]);
+        })
 
 
       var barcelona = new google.maps.LatLng(41.3947688, 2.0787279);
       var mapOptions = {
-          zoom: 7,
-          center: barcelona
+        zoom: 7,
+        center: barcelona
       };
       map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
       directionsDisplay.setMap(map);
@@ -94,40 +101,40 @@
       directionsDisplay3.setMap(map);
       directionsDisplay.setPanel(document.getElementById('dvPanel'));
       directionsDisplay.setOptions({
-      polylineOptions: {
-        strokeColor: 'red'
-      }
-    });
-    directionsDisplay2.setOptions({
-      polylineOptions: {
-        strokeColor: 'green'
-      }
-    });
-    directionsDisplay3.setOptions({
-      polylineOptions: {
-        strokeColor: 'black'
-      }
-    });
+        polylineOptions: {
+          strokeColor: 'red'
+        }
+      });
+      directionsDisplay2.setOptions({
+        polylineOptions: {
+          strokeColor: 'green'
+        }
+      });
+      directionsDisplay3.setOptions({
+        polylineOptions: {
+          strokeColor: 'black'
+        }
+      });
 
       //*********DIRECTIONS AND ROUTE**********************//
       source = document.getElementById("txtSource").value;
       destination = document.getElementById("txtDestination").value;
 
       var request = {
-          origin: source,
-          destination: destination,
-          travelMode: google.maps.TravelMode.DRIVING,
-          provideRouteAlternatives: true
+        origin: source,
+        destination: destination,
+        travelMode: google.maps.TravelMode.DRIVING,
+        provideRouteAlternatives: true
       };
       directionsService.route(request, function (response, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(response);
-              console.log(response)
-              directionsDisplay2.setDirections(response);
-              directionsDisplay2.setRouteIndex(1);
-              directionsDisplay3.setDirections(response);
-              directionsDisplay3.setRouteIndex(2);
-          }
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+          console.log(response)
+          directionsDisplay2.setDirections(response);
+          directionsDisplay2.setRouteIndex(1);
+          directionsDisplay3.setDirections(response);
+          directionsDisplay3.setRouteIndex(2);
+        }
       });
 
       // //*********DISTANCE AND DURATION**********************//
@@ -152,7 +159,7 @@
       //         alert("Unable to find the distance via road.");
       //     }
       // });
-  }
+    }
   </script>
 
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
