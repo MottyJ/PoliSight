@@ -7,7 +7,7 @@ import bottle
 connection = connect(host='localhost',
                      user='root',
                      password='hulk',
-                     db='imdb',
+                     db='test',
                      charset='utf8',
                      cursorclass=cursors.DictCursor)
 print(connection)
@@ -21,7 +21,7 @@ def connect(sql):
     except:
         connection.close()
 
-my_query = connect("select full_name,id from actors")
+my_query = connect("select longitude,LATITUDE from db_head")
 print(my_query)
 
 @bottle.route('/')

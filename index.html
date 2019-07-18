@@ -64,6 +64,7 @@
   var source, destination;
   var directionsDisplay;
   var directionsDisplay2;
+  
   var directionsService = new google.maps.DirectionsService();
   google.maps.event.addDomListener(window, 'load', function () {
       new google.maps.places.SearchBox(document.getElementById('txtSource'));
@@ -81,7 +82,11 @@
       map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
       directionsDisplay.setMap(map);
       directionsDisplay.setPanel(document.getElementById('dvPanel'));
-   
+      directionsDisplay.setOptions({
+      polylineOptions: {
+        strokeColor: 'red'
+      }
+    });
       //*********DIRECTIONS AND ROUTE**********************//
       source = document.getElementById("txtSource").value;
       destination = document.getElementById("txtDestination").value;
