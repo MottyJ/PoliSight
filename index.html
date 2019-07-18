@@ -58,6 +58,7 @@
       </td>
     </tr>
   </table>
+  <div id="underDiv"></div>
 
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFlO6wbOOH-2IeCikhNfCoH_Z0PMrj628&libraries=places"></script>
   <script type="text/javascript">
@@ -75,6 +76,13 @@
   });
 
   function GetRoute() {
+    $.ajax( "/getall" )
+      .done(function(res) {
+        console.log('res')
+        $("#underDiv").text(res)
+      })
+
+
       var barcelona = new google.maps.LatLng(41.3947688, 2.0787279);
       var mapOptions = {
           zoom: 7,
@@ -97,7 +105,7 @@
     });
     directionsDisplay3.setOptions({
       polylineOptions: {
-        strokeColor: 'purple'
+        strokeColor: 'black'
       }
     });
 
@@ -114,6 +122,7 @@
       directionsService.route(request, function (response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(response);
+              console.log(response)
               directionsDisplay2.setDirections(response);
               directionsDisplay2.setRouteIndex(1);
               directionsDisplay3.setDirections(response);

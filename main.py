@@ -1,6 +1,7 @@
 import os
 from pymysql import connect, cursors
 import bottle
+import json
 
 
 
@@ -13,21 +14,23 @@ connection = connect(host='localhost',
 print(connection)
 
 def connect(sql):
-    try:
         with connection.cursor() as cursor:
             cursor.execute(sql)
             result = cursor.fetchall()
-            return result
-    except:
-        connection.close()
+            print(result)
+            return json.dumps(result)
 
-my_query = connect("select longitude,LATITUDE from db_head")
-print(my_query)
+#
+my_query = "select longitude,LATITUDE,field_1 from db_head limit 3 "
+# print(my_query)
 
 @bottle.route('/')
 def index():
-
     return bottle.template("index.html")
+
+@bottle.route('/getall')
+def index():
+    return connect(my_query)
 
 
 @bottle.route('/css/<filename:re:.*\.css>')
