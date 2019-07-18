@@ -33,9 +33,9 @@
     <tr>
       <td colspan="2">
         Source:
-        <input type="text" id="txtSource" value="vila de gracia" style="width: 200px" />
+        <input type="text" id="txtSource" value="41.380885,2.132392" style="width: 200px" />
         &nbsp; Destination:
-        <input type="text" id="txtDestination" value="les tres torres" style="width: 200px" />
+        <input type="text" id="txtDestination" value="41.407796,2.161978" style="width: 200px" />
         <br />
         <input type="button" value="Get Route" onclick="GetRoute()" />
         <hr />
@@ -52,14 +52,14 @@
         <div id="dvMap" style="width: 500px; height: 500px">
         </div>
       </td>
-      <!-- <td>
+      <td>
         <div id="dvPanel" style="width: 500px; height: 500px">
         </div>
-      </td> -->
+      </td>
     </tr>
   </table>
 
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFlO6wbOOH-2IeCikhNfCoH_Z0PMrj628&sensor=false&libraries=places"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFlO6wbOOH-2IeCikhNfCoH_Z0PMrj628&libraries=places"></script>
   <script type="text/javascript">
   var source, destination;
   var directionsDisplay;
@@ -80,9 +80,8 @@
       };
       map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
       directionsDisplay.setMap(map);
-      directionsDisplay2.setMap(map);
-      // directionsDisplay.setPanel(document.getElementById('dvPanel'));
-
+      directionsDisplay.setPanel(document.getElementById('dvPanel'));
+   
       //*********DIRECTIONS AND ROUTE**********************//
       source = document.getElementById("txtSource").value;
       destination = document.getElementById("txtDestination").value;
