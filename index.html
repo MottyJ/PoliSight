@@ -77,9 +77,9 @@
 
   function GetRoute() {
     $.ajax( "/getall" )
-      .done(function(res) {
+      .success(function(res) {
         console.log('res')
-        $("#underDiv").text(res)
+        $("#underDiv").text(res[0])
       })
 
 
