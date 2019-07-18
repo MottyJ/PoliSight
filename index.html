@@ -64,12 +64,14 @@
   var source, destination;
   var directionsDisplay;
   var directionsDisplay2;
+  var directionsDisplay3;
   var directionsService = new google.maps.DirectionsService();
   google.maps.event.addDomListener(window, 'load', function () {
       new google.maps.places.SearchBox(document.getElementById('txtSource'));
       new google.maps.places.SearchBox(document.getElementById('txtDestination'));
       directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
       directionsDisplay2 = new google.maps.DirectionsRenderer({ 'draggable': true});
+      directionsDisplay3 = new google.maps.DirectionsRenderer({ 'draggable': true});
   });
 
   function GetRoute() {
@@ -80,6 +82,8 @@
       };
       map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
       directionsDisplay.setMap(map);
+      directionsDisplay2.setMap(map);
+      directionsDisplay3.setMap(map);
       directionsDisplay.setPanel(document.getElementById('dvPanel'));
    
       //*********DIRECTIONS AND ROUTE**********************//
@@ -97,6 +101,8 @@
               directionsDisplay.setDirections(response);
               directionsDisplay2.setDirections(response);
               directionsDisplay2.setRouteIndex(1);
+              directionsDisplay3.setDirections(response);
+              directionsDisplay3.setRouteIndex(2);
           }
       });
 
